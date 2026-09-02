@@ -3,115 +3,57 @@
 
 LOG_MODULE_REGISTER(demo, LOG_LEVEL_DBG);
 
-#define STACK_SIZE 1024
+#define STACK_SIZE      1024
+#define PRIO            5
+#define INCREMENTS      1000000   /* each thread increments this many times */
 
-#define PRIO_A 5
-#define PRIO_B 5
+/* Shared state - intentionally unprotected */
+static volatile uint32_t counter;
 
-void thread_a_fn(void *p1, void *p2, void *p3)
+// static struct k_sem done_sem;
+static K_SEM_DEFINE(done_sem, 0, 2);
+static K_MUTEX_DEFINE(counter_mutex);
+
+void worker_fn(void *p1, void *p2, void *p3)
 {
-    while (1) {
-        k_msleep(200);
+    const char *name = k_thread_name_get(k_current_get());
+
+    for (int i = 0; i < INCREMENTS; i++) {
+        k_mutex_lock(&counter_mutex, K_FOREVER);
+        counter++;
+        k_mutex_unlock(&counter_mutex);
     }
+
+    LOG_INF("[%s] finished", name);
+    k_sem_give(&done_sem);
 }
 
-void thread_b_fn(void *p1, void *p2, void *p3)
-{
-    while (1) {
-        k_msleep(300);
-    }
-}
-
-K_THREAD_DEFINE(thread_a, STACK_SIZE, thread_a_fn,
-                NULL, NULL, NULL, PRIO_A, 0, 0);
-K_THREAD_DEFINE(thread_b, STACK_SIZE, thread_b_fn,
-                NULL, NULL, NULL, PRIO_B, 0, 0);
+K_THREAD_DEFINE(worker_a, STACK_SIZE, worker_fn, NULL, NULL, NULL,
+                PRIO, 0, 0);
+K_THREAD_DEFINE(worker_b, STACK_SIZE, worker_fn, NULL, NULL, NULL,
+                PRIO, 0, 0);
 
 int main(void)
 {
+    // k_sem_init(&done_sem, 0, 2);
+    int64_t time = k_uptime_get();
+
+    LOG_INF("=== l2-task1: Mutex Protection ===");
+    LOG_INF("Expected final value: %d", INCREMENTS * 2);
+
+    /* Wait for both workers to complete */
+    k_sem_take(&done_sem, K_FOREVER);
+    k_sem_take(&done_sem, K_FOREVER);
+
+    LOG_INF("Actual  final value: %u", counter);
+
+    if (counter == INCREMENTS * 2) {
+        LOG_WRN("No race this run");
+    } else {
+        LOG_ERR("Race condition confirmed: lost %d updates",
+                (INCREMENTS * 2) - counter);
+    }
+    LOG_INF("Execution time: %lld ms", k_uptime_delta(&time));
+
     return 0;
 }
-
-#include <zephyr/kernel.h>
-#include <zephyr/logging/log.h>
-
-LOG_MODULE_REGISTER(demo, LOG_LEVEL_DBG);
-
-#define STACK_SIZE 1024
-
-#define PRIO_COOP  (-1)
-#define PRIO_HIGH    3
-#define PRIO_MID     5
-#define PRIO_LOW     7
-
-void coop_fn(void *p1, void *p2, void *p3)
-{
-    LOG_INF("[COOP] starting - will run 5 steps without yielding");
-
-    for (int i = 0; i < 5; i++) {
-        k_busy_wait(40000);   
-        LOG_INF("[COOP] step %d/5 - still holding CPU  tick=%u",
-                i + 1, k_uptime_get_32());
-    }
-
-    LOG_INF("[COOP] yielding now - HIGH ,MEDIUM , LOW can run");
-    k_yield();
-
-    LOG_INF("[COOP] done");
-}
-
-void t_high_fn(void *p1, void *p2, void *p3)
-{
-    LOG_INF("[HIGH] started");
-    for (int i = 0; i < 10; i++) {
-        // LOG_INF("[T_HIGH] step %d  tick=%u", i, k_uptime_get_32());
-        LOG_INF("[T_HIGH] running");
-        k_msleep(100);
-    }
-
-    LOG_INF("[HIGH] done");
-}
-
-void t_med_fn(void *p1, void *p2, void *p3)
-{
-    LOG_INF("[MID] started");
-
-    for (int i = 0; i < 10; i++) {
-        // LOG_INF("[T_MID] step %d  tick=%u", i, k_uptime_get_32());
-        LOG_INF("[T_MED] running");
-
-        k_msleep(200);
-    }
-
-    LOG_INF("[MID] done");
-}
-
-void t_low_fn(void *p1, void *p2, void *p3)
-{
-    LOG_INF("[LOW] started");
-
-    for (int i = 0; i < 10; i++) {
-        // LOG_INF("[T_LOW] step %d  tick=%u", i, k_uptime_get_32());
-        LOG_INF("[T_LOW] running");
-        k_msleep(300);
-    }
-
-    LOG_INF("[LOW] done");
-}
-
-
-K_THREAD_DEFINE(t_coop, STACK_SIZE, coop_fn, NULL, NULL, NULL, PRIO_COOP, 0, 0);
-K_THREAD_DEFINE(t_high, STACK_SIZE, t_high_fn, NULL, NULL, NULL, PRIO_HIGH, 0, 0);
-K_THREAD_DEFINE(t_low,  STACK_SIZE, t_low_fn,  NULL, NULL, NULL, PRIO_LOW,  0, 0);
-K_THREAD_DEFINE(t_mid, STACK_SIZE, t_med_fn, NULL, NULL, NULL, PRIO_MID, 0, 0);
-
-
-int main(void)
-{
-    LOG_INF("=== l1-task1 ===");
-    uint32_t buildtime = k_uptime_get_32();  
-    LOG_INF("Build time tick=%u", buildtime);
-    LOG_INF("COOP prio=%d (cooperative)  HIGH prio=%d  MID prio=%d  LOW prio=%d",
-            PRIO_COOP, PRIO_HIGH, PRIO_MID, PRIO_LOW);
-    return 0;
-}  
