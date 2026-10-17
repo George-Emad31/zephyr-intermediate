@@ -6,3 +6,6 @@ build
 deps
 project_layout.txt
 .cache
+# Twister output (only the coverage report is committed)
+twister-out*/*
+!twister-out/coverage/
