@@ -1,0 +1,8 @@
+# Build
+build
+
+# West files
+.west
+deps
+project_layout.txt
+.cache
