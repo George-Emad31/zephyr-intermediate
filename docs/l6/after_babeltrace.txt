@@ -1,0 +1,26 @@
+[02:00:01.233575844] (+0.099222204) isr_enter: 
+[02:00:01.233603492] (+0.000027648) timer_expiry_enter: { id = 1099216 }
+[02:00:01.233620932] (+0.000017440) msgq_put_enter: { id = 1099280, timeout = 0 }
+[02:00:01.233647780] (+0.000026848) thread_sched_ready: { thread_id = 1126592, name = "control" }
+[02:00:01.233672420] (+0.000024640) msgq_put_exit: { id = 1099280, timeout = 0, ret = 0 }
+[02:00:01.233688580] (+0.000016160) semaphore_give_enter: { id = 1099360 }
+[02:00:01.233715012] (+0.000026432) thread_sched_ready: { thread_id = 1126400, name = "maintenance" }
+[02:00:01.233744420] (+0.000029408) semaphore_give_exit: { id = 1099360 }
+[02:00:01.233764164] (+0.000019744) named_event: { name = "ctl_ready", arg0 = 2, arg1 = 0 }
+[02:00:01.233779780] (+0.000015616) timer_expiry_exit: { id = 1099216 }
+[02:00:01.233800164] (+0.000020384) isr_exit: 
+[02:00:01.233822884] (+0.000022720) thread_switched_out: { thread_id = 1131616, name = "idle" }
+[02:00:01.233846820] (+0.000023936) thread_switched_in: { thread_id = 1126592, name = "control" }
+[02:00:01.233862532] (+0.000015712) msgq_get_exit: { id = 1099280, timeout = 4294957296, ret = 0 }
+[02:00:01.233885252] (+0.000022720) syscall_enter: { id = 110, name = "sys_clock_hw_cycles" }
+[02:00:01.233901060] (+0.000015808) syscall_exit: { id = 110 }
+[02:00:01.233922340] (+0.000021280) named_event: { name = "ctl_done", arg0 = 2, arg1 = 258 }
+[02:00:01.233938788] (+0.000016448) msgq_get_enter: { id = 1099280, timeout = 4294957296 }
+[02:00:01.233953732] (+0.000014944) msgq_get_blocking: { id = 1099280, timeout = 4294957296 }
+[02:00:01.233989700] (+0.000035968) thread_sched_pend: { thread_id = 1126592, name = "control" }
+[02:00:01.234016676] (+0.000026976) thread_switched_out: { thread_id = 1126592, name = "control" }
+[02:00:01.234041124] (+0.000024448) thread_switched_in: { thread_id = 1126400, name = "maintenance" }
+[02:00:01.234056836] (+0.000015712) semaphore_take_exit: { id = 1099360, timeout = 4294957296, ret = 0 }
+[02:00:01.234072324] (+0.000015488) thread_busy_wait_enter: { usec_to_wait = 45000 }
+[02:00:01.234094148] (+0.000021824) syscall_enter: { id = 110, name = "sys_clock_hw_cycles" }
+[02:00:01.234109924] (+0.000015776) syscall_exit: { id = 110 }

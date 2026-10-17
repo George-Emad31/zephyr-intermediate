@@ -1,0 +1,39 @@
+c[?7lSeaBIOS (version rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org)
+uart:~$ *** Booting Zephyr OS build v4.4.0-14907-g3860b8cb663f ***
+uart:~$ [00:00:00.000,000] <inf> homework: === L6 Homework: Runtime Investigation ===
+uart:~$ [00:00:00.000,000] <inf> homework: Guarantee: control work starts within 10000 us of event ready
+uart:~$ [00:00:00.000,000] <inf> homework: control prio=3  maintenance prio=4 (lower = more urgent)
+uart:~$ uart:~$ kernel thread list
+Scheduler: 15 since last call
+Threads:
+ 0x11b000 maintenance
+	options: 0x0, priority: 4 timeout: 0
+	state: pending, entry: 0x1009f6
+	Total execution cycles: 94578300 (16 %)
+	stack size 2048, unused 1680, usage 368 / 2048 (17 %)
+ 0x11b0c0 control   
+	options: 0x0, priority: 3 timeout: 0
+	state: pending, entry: 0x100a74
+	Total execution cycles: 124900 (0 %)
+	stack size 2048, unused 1592, usage 456 / 2048 (22 %)
+*0x11b280 shell_uart
+	options: 0x0, priority: 14 timeout: 0
+	state: queued, entry: 0x10746d
+	Total execution cycles: 1118800 (0 %)
+	stack size 2048, unused 840, usage 1208 / 2048 (58 %)
+ 0x11b180 logging   
+	options: 0x0, priority: 14 timeout: 0
+	state: pending, entry: 0x103b1a
+	Total execution cycles: 84800 (0 %)
+	stack size 768, unused 376, usage 392 / 768 (51 %)
+ 0x11b7a0 idle      
+	options: 0x1, priority: 15 timeout: 0
+	state: , entry: 0x10cdb9
+	Total execution cycles: 473871400 (83 %)
+	stack size 320, unused 176, usage 144 / 320 (45 %)
+uart:~$ [00:00:05.260,000] <inf> homework: [SUMMARY] events=20 misses=0 (0%) max_latency=269us drops=0
+uart:~$ uart:~$ [00:00:10.260,000] <inf> homework: [SUMMARY] events=40 misses=0 (0%) max_latency=269us drops=0
+uart:~$ uart:~$ [00:00:15.260,000] <inf> homework: [SUMMARY] events=60 misses=0 (0%) max_latency=291us drops=0
+uart:~$ uart:~$ [00:00:20.260,000] <inf> homework: [SUMMARY] events=80 misses=0 (0%) max_latency=346us drops=0
+uart:~$ uart:~$ [00:00:25.260,000] <inf> homework: [SUMMARY] events=100 misses=0 (0%) max_latency=355us drops=0
+uart:~$ uart:~$ qemu-system-i386: terminating on signal 15 from pid 54682 (<unknown process>)

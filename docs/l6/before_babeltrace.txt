@@ -1,0 +1,39 @@
+[02:00:01.233575844] (+0.099221660) isr_enter: 
+[02:00:01.233604036] (+0.000028192) timer_expiry_enter: { id = 1099216 }
+[02:00:01.233621476] (+0.000017440) msgq_put_enter: { id = 1099280, timeout = 0 }
+[02:00:01.233648324] (+0.000026848) thread_sched_ready: { thread_id = 1126592, name = "control" }
+[02:00:01.233672964] (+0.000024640) msgq_put_exit: { id = 1099280, timeout = 0, ret = 0 }
+[02:00:01.233689124] (+0.000016160) semaphore_give_enter: { id = 1099360 }
+[02:00:01.233715556] (+0.000026432) thread_sched_ready: { thread_id = 1126400, name = "maintenance" }
+[02:00:01.233745188] (+0.000029632) semaphore_give_exit: { id = 1099360 }
+[02:00:01.233764932] (+0.000019744) named_event: { name = "ctl_ready", arg0 = 2, arg1 = 0 }
+[02:00:01.233780548] (+0.000015616) timer_expiry_exit: { id = 1099216 }
+[02:00:01.233800932] (+0.000020384) isr_exit: 
+[02:00:01.233823652] (+0.000022720) thread_switched_out: { thread_id = 1131616, name = "idle" }
+[02:00:01.233848100] (+0.000024448) thread_switched_in: { thread_id = 1126400, name = "maintenance" }
+[02:00:01.233863812] (+0.000015712) semaphore_take_exit: { id = 1099360, timeout = 4294957296, ret = 0 }
+[02:00:01.233879300] (+0.000015488) thread_busy_wait_enter: { usec_to_wait = 45000 }
+[02:00:01.233901124] (+0.000021824) syscall_enter: { id = 110, name = "sys_clock_hw_cycles" }
+[02:00:01.233916900] (+0.000015776) syscall_exit: { id = 110 }
+[02:00:01.243575850] (+0.009658950) isr_enter: 
+[02:00:01.243597226] (+0.000021376) timer_expiry_enter: { id = 1131232 }
+[02:00:01.243612106] (+0.000014880) semaphore_give_enter: { id = 1099388 }
+[02:00:01.243638922] (+0.000026816) thread_sched_ready: { thread_id = 1131296, name = "tracing_thread" }
+[02:00:01.243661194] (+0.000022272) semaphore_give_exit: { id = 1099388 }
+[02:00:01.243675562] (+0.000014368) timer_expiry_exit: { id = 1131232 }
+[02:00:01.243695946] (+0.000020384) isr_exit: 
+[02:00:01.253575856] (+0.009879910) isr_enter: 
+[02:00:01.253623920] (+0.000048064) isr_exit: 
+[02:00:01.273575868] (+0.019951948) isr_enter: 
+[02:00:01.273623932] (+0.000048064) isr_exit: 
+[02:00:01.278895263] (+0.005271331) thread_busy_wait_exit: { usec_to_wait = 45000 }
+[02:00:01.278910399] (+0.000015136) semaphore_take_enter: { id = 1099360, timeout = 4294957296 }
+[02:00:01.278925375] (+0.000014976) semaphore_take_blocking: { id = 1099360, timeout = 4294957296 }
+[02:00:01.278972255] (+0.000046880) thread_sched_pend: { thread_id = 1126400, name = "maintenance" }
+[02:00:01.278999743] (+0.000027488) thread_switched_out: { thread_id = 1126400, name = "maintenance" }
+[02:00:01.279023679] (+0.000023936) thread_switched_in: { thread_id = 1126592, name = "control" }
+[02:00:01.279039391] (+0.000015712) msgq_get_exit: { id = 1099280, timeout = 4294957296, ret = 0 }
+[02:00:01.279062111] (+0.000022720) syscall_enter: { id = 110, name = "sys_clock_hw_cycles" }
+[02:00:01.279077919] (+0.000015808) syscall_exit: { id = 110 }
+[02:00:01.279105087] (+0.000027168) named_event: { name = "ctl_done", arg0 = 2, arg1 = 45435 }
+[02:00:01.279121535] (+0.000016448) msgq_get_enter: { id = 1099280, timeout = 4294957296 }

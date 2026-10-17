@@ -1,0 +1,10 @@
+/* Route the CTF stream to the second QEMU serial port (uart1). */
+/ {
+	chosen {
+		zephyr,tracing-uart = &uart1;
+	};
+};
+
+&uart1 {
+	status = "okay";
+};

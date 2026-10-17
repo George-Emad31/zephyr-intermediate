@@ -1,0 +1,87 @@
+c[?7lSeaBIOS (version rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org)
+uart:~$ *** Booting Zephyr OS build v4.4.0-14907-g3860b8cb663f ***
+uart:~$ [00:00:00.000,000] <inf> homework: === L6 Homework: Runtime Investigation ===
+uart:~$ [00:00:00.000,000] <inf> homework: Guarantee: control work starts within 10000 us of event ready
+uart:~$ [00:00:00.000,000] <inf> homework: control prio=7  maintenance prio=4 (lower = more urgent)
+uart:~$ uart:~$ [00:00:00.560,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=0 latency=45936us deadline=10000us misses=1 (+0 suppressed)
+uart:~$ [00:00:01.560,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=4 latency=45282us deadline=10000us misses=5 (+3 suppressed)
+uart:~$ uart:~$ [00:00:02.560,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=8 latency=45195us deadline=10000us misses=9 (+3 suppressed)
+uart:~$ [00:00:03.560,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=12 latency=45232us deadline=10000us misses=13 (+3 suppressed)
+uart:~$ uart:~$ kernel thread list
+Scheduler: 9 since last call
+Threads:
+ 0x11b000 maintenance
+	options: 0x0, priority: 4 timeout: 0
+	state: pending, entry: 0x1009f6
+	Total execution cycles: 94614900 (16 %)
+	stack size 2048, unused 1680, usage 368 / 2048 (17 %)
+ 0x11b0c0 control   
+	options: 0x0, priority: 7 timeout: 0
+	state: pending, entry: 0x100a74
+	Total execution cycles: 120400 (0 %)
+	stack size 2048, unused 1592, usage 456 / 2048 (22 %)
+*0x11b280 shell_uart
+	options: 0x0, priority: 14 timeout: 0
+	state: queued, entry: 0x10746d
+	Total execution cycles: 1731300 (0 %)
+	stack size 2048, unused 840, usage 1208 / 2048 (58 %)
+ 0x11b180 logging   
+	options: 0x0, priority: 14 timeout: 0
+	state: pending, entry: 0x103b1a
+	Total execution cycles: 86400 (0 %)
+	stack size 768, unused 376, usage 392 / 768 (51 %)
+ 0x11b7a0 idle      
+	options: 0x1, priority: 15 timeout: 0
+	state: , entry: 0x10cdb9
+	Total execution cycles: 467886900 (82 %)
+	stack size 320, unused 176, usage 144 / 320 (45 %)
+uart:~$ [00:00:04.810,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=17 latency=45180us deadline=10000us misses=18 (+4 suppressed)
+uart:~$ [00:00:05.300,000] <inf> homework: [SUMMARY] events=20 misses=20 (100%) max_latency=45936us drops=0
+uart:~$ [00:00:05.810,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=21 latency=45102us deadline=10000us misses=22 (+3 suppressed)
+uart:~$ uart:~$ kernel thread runtime-stats
+thread - Kernel threads.
+Subcommands:
+  kill     : kernel thread kill <thread_id>
+  list     : List kernel threads.
+  resume   : kernel thread resume <thread_id>
+  stacks   : List threads stack usage.
+  suspend  : kernel thread suspend <thread_id>
+  unwind   : Unwind a thread <thread_id>
+uart:~$ [00:00:06.810,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=25 latency=45179us deadline=10000us misses=26 (+3 suppressed)
+uart:~$ [00:00:07.810,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=29 latency=45247us deadline=10000us misses=30 (+3 suppressed)
+uart:~$ uart:~$ kernel thread list
+Scheduler: 11 since last call
+Threads:
+ 0x11b000 maintenance
+	options: 0x0, priority: 4 timeout: 0
+	state: pending, entry: 0x1009f6
+	Total execution cycles: 148681800 (17 %)
+	stack size 2048, unused 1680, usage 368 / 2048 (17 %)
+ 0x11b0c0 control   
+	options: 0x0, priority: 7 timeout: 0
+	state: pending, entry: 0x100a74
+	Total execution cycles: 150700 (0 %)
+	stack size 2048, unused 1592, usage 456 / 2048 (22 %)
+*0x11b280 shell_uart
+	options: 0x0, priority: 14 timeout: 0
+	state: queued, entry: 0x10746d
+	Total execution cycles: 3438100 (0 %)
+	stack size 2048, unused 840, usage 1208 / 2048 (58 %)
+ 0x11b180 logging   
+	options: 0x0, priority: 14 timeout: 0
+	state: pending, entry: 0x103b1a
+	Total execution cycles: 111500 (0 %)
+	stack size 768, unused 376, usage 392 / 768 (51 %)
+ 0x11b7a0 idle      
+	options: 0x1, priority: 15 timeout: 0
+	state: , entry: 0x10cdb9
+	Total execution cycles: 713681900 (82 %)
+	stack size 320, unused 176, usage 144 / 320 (45 %)
+uart:~$ [00:00:08.810,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=33 latency=45199us deadline=10000us misses=34 (+3 suppressed)
+uart:~$ [00:00:09.810,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=37 latency=45365us deadline=10000us misses=38 (+3 suppressed)
+uart:~$ uart:~$ [00:00:10.310,000] <inf> homework: [SUMMARY] events=40 misses=40 (100%) max_latency=45936us drops=0
+uart:~$ [00:00:10.810,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=41 latency=45342us deadline=10000us misses=42 (+3 suppressed)
+uart:~$ uart:~$ [00:00:12.060,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=46 latency=45247us deadline=10000us misses=47 (+4 suppressed)
+uart:~$ uart:~$ [00:00:13.300,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=51 latency=45178us deadline=10000us misses=52 (+4 suppressed)
+uart:~$ [00:00:14.300,000] <wrn> homework: [CONTROL] DEADLINE MISS seq=55 latency=45322us deadline=10000us misses=56 (+3 suppressed)
+uart:~$ uart:~$ qemu-system-i386: terminating on signal 15 from pid 24230 (<unknown process>)
